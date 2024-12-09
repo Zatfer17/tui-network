@@ -26,13 +26,12 @@ You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 - `enter` to connect
 
 ### Scan for available networks
-- `ctrl+s` to start the scan
-- `ctrl+r` to refresh the page
+- `ctrl+r` to rescan and refresh the page
 
 ### Toggle the wifi power
-- `ctrl+u` to power up the wifi
-- `ctrl+d` to power down the wifi
-- `ctrl+r` to refresh the page
+- `ctrl+1` to power up the wifi
+- `ctrl+2` to power down the wifi
+- `ctrl+r` to rescan and refresh the page
 
 ## Dependencies
 

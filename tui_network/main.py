@@ -82,8 +82,8 @@ class NetworkApp(App):
 
     BINDINGS = [
         ("ctrl+r", "refresh()", "Refresh"),
-        ("ctrl+<", "toggle('off')", "Wifi down"),
-        ("ctrl+>", "toggle('on')", "Wifi up"),
+        ("ctrl+1", "toggle('off')", "Wifi down"),
+        ("ctrl+2", "toggle('on')", "Wifi up"),
     ]
 
     def compose(self) -> ComposeResult:
