@@ -2,11 +2,11 @@ from textual.app import App, ComposeResult
 from textual.widgets import Footer, DataTable, Input, RichLog
 from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup
 from tui_network.features.network_manager.network_manager import NetworkManager
-
+from fortune import fortune
 
 nm = NetworkManager()
 
-class StatusWidget(VerticalGroup):
+class StatusWidget(VerticalScroll):
 
     BORDER_TITLE = "Status"
 
@@ -25,9 +25,9 @@ class StatusWidget(VerticalGroup):
         except:
             print('Wireless is down...')
 
-class AvailableNetworksWidget(VerticalScroll):
+class NetworksWidget(VerticalScroll):
 
-    BORDER_TITLE = "Available networks"
+    BORDER_TITLE = "Networks"
 
     def compose(self) -> ComposeResult:
         yield DataTable(
@@ -63,6 +63,18 @@ class ConnectWidget(HorizontalGroup):
             network_passphrase = message.value
             nm.connect(network_name, network_passphrase)
 
+class FortuneWidget(VerticalScroll):
+
+    BORDER_TITLE = "Fortune"
+
+    def compose(self) -> ComposeResult:
+        yield RichLog(wrap=True)
+
+    def on_mount(self):
+        log = self.query_one(RichLog)
+        log.write(fortune())
+
+
 class NetworkApp(App):
 
     BORDER_TITLE = "Network app"
@@ -76,9 +88,10 @@ class NetworkApp(App):
 
     def compose(self) -> ComposeResult:
         yield Container(
-            VerticalGroup(AvailableNetworksWidget(can_focus=False), id='available_networks'),
-            VerticalGroup(StatusWidget(), id='status'),
+            VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
+            VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
             VerticalGroup(ConnectWidget(), id='connect'),
+            VerticalGroup(FortuneWidget(can_focus=False, can_focus_children=False), id='fortune')
         )
         yield Footer()
 
