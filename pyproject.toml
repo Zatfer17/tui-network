@@ -5,7 +5,7 @@ description = "A Python based TUI for managing the wifi on Linux"
 authors = ["Matteo Ferrini <mimmi.ferrini@gmail.com>"]
 readme = "README.md"
 include = [
-    "tui_network/assets"
+    "tui_network/static"
 ]
 
 [tool.poetry.scripts]
@@ -13,6 +13,7 @@ tui-network = "tui_network.main:network_app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+textual = "^0.89.1"
 
 [build-system]
 requires = ["poetry-core"]

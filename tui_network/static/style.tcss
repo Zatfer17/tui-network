@@ -1,51 +1,53 @@
 Container {
     layout: grid;
-    grid-size: 2 5;
+    grid-size: 2 3;
     grid-rows: 1fr;
     grid-columns: 1fr;
     grid-gutter: 1 3;
     margin: 1;
 }
 
-#p1 {
-    row-span: 4;
+#available_networks {
+    row-span: 3;
     column-span: 1;
 }
 
 AvailableNetworksWidget {
-    border: heavy $accent;
     height: 100h;
+    border: grey;
 }
 
-#p2 {
-    row-span: 2;
-    column-span: 2;
-}
-
-DevicesWidget {
+AvailableNetworksWidget:focus-within {
     border: heavy $accent;
-    height: 100h;
 }
 
-#p3 {
+#status {
     row-span: 2;
-    column-span: 2;
+    column-span: 1;
 }
 
 StatusWidget {
-    border: heavy $accent;
     height: 100h;
+    border: grey;
 }
 
-#p4 {
+StatusWidget:focus-within {
+    border: heavy $accent;
+}
+
+#connect {
     row-span: 1;
-    column-span: 4;
+    column-span: 1;
 }
 
 ConnectWidget {
-    border: heavy $accent;
     padding: 1;
     height: 100h;
+    border: grey;
+}
+
+ConnectWidget:focus-within {
+    border: heavy $accent;
 }
 
 DataTable {

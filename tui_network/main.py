@@ -19,10 +19,9 @@ class StatusWidget(VerticalGroup):
 
     def on_mount(self) -> None:
         table = self.query_one(DataTable)
-        status = nm.get_status()
         try:
-            table.add_columns(*status[0].keys())
-            table.add_rows([x.values() for x in status])
+            table.add_columns(*nm.get_status_header())
+            table.add_rows(nm.get_status())
         except:
             print('Wireless is down...')
 
@@ -38,15 +37,14 @@ class AvailableNetworksWidget(VerticalScroll):
 
     def on_mount(self) -> None:
         table = self.query_one(DataTable)
-        networks = nm.get_networks()
         try:
-            table.add_columns(*networks[0].keys())
-            table.add_rows([x.values() for x in networks])
+            table.add_columns(*nm.get_networks_header())
+            table.add_rows(nm.get_networks())
         except:
             print('Wireless is down...')
 
     def on_data_table_row_selected(self, message: DataTable.RowSelected) -> None:
-        self.app.query_one('#network_name').insert_text_at_cursor(message.data_table.get_row_at(message.cursor_row)[0])
+        self.app.query_one('#network_name').insert_text_at_cursor(message.data_table.get_row_at(message.cursor_row)[1])
         self.app.query_one('#network_passphrase').focus()
 
 class ConnectWidget(HorizontalGroup):
@@ -65,47 +63,31 @@ class ConnectWidget(HorizontalGroup):
             network_passphrase = message.value
             nm.connect(network_name, network_passphrase)
 
-class FortuneWidget(VerticalScroll):
-
-    BORDER_TITLE = "Some wisdom"
-
-    def compose(self) -> ComposeResult:
-        yield RichLog()
-
-    def on_mount(self) -> None:
-        text = self.query_one(RichLog)
-        text.write(fortune())
-
 class NetworkApp(App):
 
     BORDER_TITLE = "Network app"
-    CSS_PATH = "assets/NetworkApp.tcss"
+    CSS_PATH = "static/style.tcss"
 
     BINDINGS = [
-        ("ctrl+s", "scan()", "Scan"),  
         ("ctrl+r", "refresh()", "Refresh"),
-        ("ctrl+u", "toggle(True)", "Wireless up"),
-        ("ctrl+d", "toggle(False)", "Wireless down"),
+        ("ctrl+u", "toggle('on')", "Wifi up"),
+        ("ctrl+d", "toggle('off')", "Wifi down"),
     ]
 
     def compose(self) -> ComposeResult:
         yield Container(
-            VerticalGroup(AvailableNetworksWidget(), id='p1'),
-            VerticalGroup(DevicesWidget(), id='p2'),
-            VerticalGroup(StatusWidget(), id='p3'),
-            VerticalGroup(ConnectWidget(), id='p4'),
+            VerticalGroup(AvailableNetworksWidget(), id='available_networks'),
+            VerticalGroup(StatusWidget(), id='status'),
+            VerticalGroup(ConnectWidget(), id='connect'),
         )
         yield Footer()
 
-    def action_scan(self) -> None:
-        nm.scan()
-
     def action_refresh(self) -> None:
-        nm.update_info()
+        nm.rescan()
         self.refresh(recompose=True)
 
-    def action_toggle(self, up: bool):
-        nm.toggle(up)
+    def action_toggle(self, direction: str):
+        nm.toggle(direction)
 
 def network_app():
     app = NetworkApp()
