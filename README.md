@@ -1,26 +1,22 @@
-![](docs/catpuccin_moka.png)
+![](docs/gruvbox.png)
 
 # tui-network
 
-`tui-network` is a Python based TUI for managing the wifi on Linux built with [Textual](https://github.com/Textualize/textual) and [dbus-python](https://dbus.freedesktop.org/doc/dbus-python/).
+`tui-network` is a Python based TUI for managing the wifi on Linux built with [Textual](https://github.com/Textualize/textual). And you can read [classic fortune quotes](https://wiki.debian.org/fortune) on the side, while waiting for the list of networks to refresh.
 
 ## Rationale
 
-I've recently started using [i3wm](https://i3wm.org/) on a DE-less Debian install as my main driver and I'm trying to keep it as minimal as possible, getting the most out of the terminal. While I like the simplicity and effectiveness of [nmcli](https://networkmanager.dev/docs/api/latest/nmcli.html), I find it really ugly. After some digging, I finally found the awesome [Impala](https://github.com/pythops/impala), which inspired me to make my own in Python with Textual.
+I've recently started using [i3wm](https://i3wm.org/) on a DE-less Debian install as my main driver and I'm trying to keep it as minimal as possible, getting the most out of the terminal. While I like the simplicity and effectiveness of [nmtui](https://man.archlinux.org/man/nmtui.1), I find it really ugly. After some digging, I finally found the awesome [Impala](https://github.com/pythops/impala), which inspired me to make my own in Python with Textual.
 
 ## Themes
 
 You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 
-![](docs/dark.png)
+![](docs/catpuccin-latte.png)
 
-![](docs/light.png)
+![](docs/monokai.png)
 
-![](docs/catpuccin_moka.png)
-
-![](docs/catpuccin_latte.png)
-
-![](docs/nord.png)
+![](docs/textual-dark.png)
 
 ## Usage
 
@@ -40,7 +36,7 @@ You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 
 ## Dependencies
 
-You need to have `iwd` as your network backend. Visit the [official Debian documentation](https://wiki.debian.org/NetworkManager/iwd) for more details.
+You need to have `nmcli` installed.
 
 ## Install
 
@@ -53,9 +49,9 @@ pipx install .
 ## Feature matrix
 
 - [x] Display current wifi network name
-- [ ] Show current wifi network signal
+- [x] Show current wifi network signal
 - [x] Display available networks
-- [ ] Show available networks signal
+- [x] Show available networks signal
 - [x] Connect to available networks
 - [x] Pretty interface
 - [x] Refresh shortcut
