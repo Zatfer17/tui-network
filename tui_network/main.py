@@ -1,27 +1,10 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, DataTable, Input
+from textual.widgets import Footer, DataTable, Input, RichLog
 from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup
 from tui_network.features.network_manager.network_manager import NetworkManager
 
 
 nm = NetworkManager()
-
-class DevicesWidget(VerticalGroup):
-
-    BORDER_TITLE = "Devices"
-
-    def compose(self) -> ComposeResult:
-        yield DataTable(
-            header_height=2,
-            show_cursor=False,
-            cursor_type='row'
-        )
-
-    def on_mount(self) -> None:
-        table = self.query_one(DataTable)
-        devices = nm.get_devices()
-        table.add_columns(*devices[0].keys())
-        table.add_rows([x.values() for x in devices])
 
 class StatusWidget(VerticalGroup):
 
@@ -82,6 +65,17 @@ class ConnectWidget(HorizontalGroup):
             network_passphrase = message.value
             nm.connect(network_name, network_passphrase)
 
+class FortuneWidget(VerticalScroll):
+
+    BORDER_TITLE = "Some wisdom"
+
+    def compose(self) -> ComposeResult:
+        yield RichLog()
+
+    def on_mount(self) -> None:
+        text = self.query_one(RichLog)
+        text.write(fortune())
+
 class NetworkApp(App):
 
     BORDER_TITLE = "Network app"
@@ -109,9 +103,6 @@ class NetworkApp(App):
     def action_refresh(self) -> None:
         nm.update_info()
         self.refresh(recompose=True)
-
-    def action_disconnect(self) -> None:
-        nm.disconnect()
 
     def action_toggle(self, up: bool):
         nm.toggle(up)
