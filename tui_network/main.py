@@ -70,7 +70,7 @@ class NetworkApp(App):
 
     BINDINGS = [
         ("ctrl+r", "refresh()", "Refresh"),
-        ("ctrl+>", "toggle('off')", "Wifi down"),
+        ("ctrl+<", "toggle('off')", "Wifi down"),
         ("ctrl+>", "toggle('on')", "Wifi up"),
     ]
 
