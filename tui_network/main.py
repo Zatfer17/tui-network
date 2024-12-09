@@ -44,7 +44,7 @@ class NetworksWidget(VerticalScroll):
             print('Wireless is down...')
 
     def on_data_table_row_selected(self, message: DataTable.RowSelected) -> None:
-        self.app.query_one('#network_name').insert_text_at_cursor(message.data_table.get_row_at(message.cursor_row)[1])
+        self.app.query_one('#network_name').insert_text_at_cursor(message.data_table.get_row_at(message.cursor_row)[0])
         self.app.query_one('#network_passphrase').focus()
 
 class ConnectWidget(HorizontalGroup):
