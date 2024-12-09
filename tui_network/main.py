@@ -76,7 +76,7 @@ class NetworkApp(App):
 
     def compose(self) -> ComposeResult:
         yield Container(
-            VerticalGroup(AvailableNetworksWidget(), id='available_networks'),
+            VerticalGroup(AvailableNetworksWidget(can_focus=False), id='available_networks'),
             VerticalGroup(StatusWidget(), id='status'),
             VerticalGroup(ConnectWidget(), id='connect'),
         )
@@ -86,9 +86,9 @@ class NetworkApp(App):
         nm.rescan()
         self.refresh(recompose=True)
 
-    def action_toggle(self, direction: str):
+    def action_toggle(self, direction: str) -> None:
         nm.toggle(direction)
 
-def network_app():
+def network_app() -> None:
     app = NetworkApp()
     app.run()
