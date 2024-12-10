@@ -15,9 +15,9 @@ class NetworkManager():
     def rescan(self) -> None:
         run('nmcli device wifi rescan')
 
-    def get_format_param(self, header) -> str:
-        header = [x.replace('_', '-') for x in header]
-        return ','.join(header)
+    def get_format_param(self, header: list[str]) -> str:
+        return ','.join(x.replace('_', '-') for x in header)
+
 
     def get_status_header(self) -> list[str]:
         return self.STATUS_HEADER
@@ -25,7 +25,7 @@ class NetworkManager():
     def get_status(self) -> list[list[str]]:
         format_options = self.get_format_param(self.get_status_header())
         output = run(f'nmcli -f {format_options} -t device')
-        return [line.split(':') for line in output.split('\n') if line != '']
+        return [line.split(':') for line in output.splitlines() if line]
 
     def get_networks_header(self) -> list[str]:
         return self.NETWORKS_HEADER
@@ -33,7 +33,7 @@ class NetworkManager():
     def get_networks(self) -> list[list[str]]:
         format_options = self.get_format_param(self.get_networks_header())
         output = run(f'nmcli -f {format_options} -t device wifi list --rescan no')
-        return [line.split(':') for line in output.split('\n') if line != '']
+        return [line.split(':') for line in output.splitlines() if line]
 
     def toggle(self, direction) -> None:
         run(f'nmcli radio wifi {direction}')
