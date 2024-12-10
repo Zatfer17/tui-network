@@ -22,8 +22,9 @@ class StatusWidget(VerticalScroll):
         try:
             table.add_columns(*nm.get_status_header())
             table.add_rows(nm.get_status())
-        except:
+        except Exception:
             print('Wireless is down...')
+
 
 class NetworksWidget(VerticalScroll):
 
@@ -71,8 +72,7 @@ class FortuneWidget(VerticalScroll):
         yield RichLog(wrap=True)
 
     def on_mount(self):
-        log = self.query_one(RichLog)
-        log.write(fortune())
+        self.query_one(RichLog).write(fortune())
 
 
 class NetworkApp(App):
