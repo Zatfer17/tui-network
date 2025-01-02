@@ -18,7 +18,6 @@ class NetworkManager():
     def get_format_param(self, header: list[str]) -> str:
         return ','.join(x.replace('_', '-') for x in header)
 
-
     def get_status_header(self) -> list[str]:
         return self.STATUS_HEADER
 
