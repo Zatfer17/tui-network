@@ -13,7 +13,7 @@ tui-network = "tui_network.main:network_app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-textual = "^0.89.1"
+textual = "1.0.0"
 fortune-python = "^1.1.1"
 
 [build-system]

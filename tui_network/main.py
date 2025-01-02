@@ -87,6 +87,7 @@ class NetworkApp(App):
     ]
 
     def compose(self) -> ComposeResult:
+        print('Hello from compose')
         yield Container(
             VerticalGroup(NetworksWidget(can_focus=False), id='networks'),
             VerticalGroup(StatusWidget(can_focus=False, can_focus_children=False), id='status'),
