@@ -33,16 +33,19 @@ You can change the theme by hitting `ctrl+p`. A sneak peek at some of them:
 - `ctrl+2` to power up the wifi
 - `ctrl+r` to rescan and refresh the page
 
+### Quit
+- `ctrl+q` to quit
+
 ## Dependencies
 
 You need to have `nmcli` installed.
 
-## Install
+## Install (with [uv](https://docs.astral.sh/uv/getting-started/installation/))
 
 ```
 git clone https://github.com/Zatfer17/tui-network
 cd tui-network
-pipx install .
+uv tool install .
 ```
 
 ## Feature matrix
