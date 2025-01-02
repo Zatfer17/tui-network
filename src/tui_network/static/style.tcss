@@ -10,10 +10,10 @@ Container {
 #networks {
     row-span: 4;
     column-span: 1;
+    height: 100h;
 }
 
 NetworksWidget {
-    height: 100h;
     border: grey;
 }
 
@@ -24,10 +24,10 @@ NetworksWidget:focus-within {
 #status {
     row-span: 2;
     column-span: 1;
+    height: 100h;
 }
 
 StatusWidget {
-    height: 100h;
     border: grey;
 }
 
@@ -38,11 +38,11 @@ StatusWidget:focus-within {
 #connect {
     row-span: 1;
     column-span: 1;
+    height: 100h;
 }
 
 ConnectWidget {
     padding: 1;
-    height: 100h;
     border: grey;
 }
 
@@ -53,11 +53,11 @@ ConnectWidget:focus-within {
 #fortune {
     row-span: 1;
     column-span: 1;
+    height: 100h;
 }
 
 FortuneWidget {
     padding: 1;
-    height: 100h;
     border: grey;
 }
 
