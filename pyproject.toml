@@ -1,21 +1,20 @@
-[tool.poetry]
+[project]
 name = "tui-network"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Python based TUI for managing the wifi on Linux"
-authors = ["Matteo Ferrini <mimmi.ferrini@gmail.com>"]
 readme = "README.md"
-include = [
-    "tui_network/static"
+authors = [
+    { name = "Matteo Ferrini", email = "mimmi.ferrini@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "fortune-python>=1.1.1",
+    "textual>=1.0.0",
 ]
 
-[tool.poetry.scripts]
-tui-network = "tui_network.main:network_app"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-textual = "^0.89.1"
-fortune-python = "^1.1.1"
+[project.scripts]
+tui-network = "tui_network:main"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

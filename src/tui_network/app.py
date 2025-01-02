@@ -1,7 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, DataTable, Input, RichLog
 from textual.containers import Container, VerticalGroup, VerticalScroll, HorizontalGroup
-from tui_network.features.network_manager.network_manager import NetworkManager
+from tui_network.features.network_manager import NetworkManager
 from fortune import fortune
 
 nm = NetworkManager()
@@ -101,7 +101,3 @@ class NetworkApp(App):
 
     def action_toggle(self, direction: str) -> None:
         nm.toggle(direction)
-
-def network_app() -> None:
-    app = NetworkApp()
-    app.run()
